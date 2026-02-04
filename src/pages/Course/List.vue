@@ -28,7 +28,7 @@ const optionsTable = {
     { key: 'name', title: 'Nombre' },
     { key: 'level_name', title: 'Nivel', sortable: false },
     { key: 'period_name', title: 'Periodo', sortable: false },
-    { key: 'is_active', title: 'Estado', sortable: false },
+    { key: 'is_active', title: 'Estado' },
     { key: 'actions', title: 'Acciones', sortable: false },
   ],
   actions: {
