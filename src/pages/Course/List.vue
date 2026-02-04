@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import { router } from '@/plugins/1.router';
-import { useAuthenticationStore } from "@/stores/useAuthenticationStore";
 
 definePage({
   name: "Course-List",
@@ -10,8 +9,6 @@ definePage({
     requiredPermission: "course.list",
   },
 });
-
-const authenticationStore = useAuthenticationStore();
 
 //FILTER
 const optionsFilter = ref({
@@ -27,9 +24,11 @@ const refTableFull = ref()
 const optionsTable = {
   url: "/course/list",
   headers: [
+    { key: 'day_course_id', title: 'ID', sortable: false },
     { key: 'name', title: 'Nombre' },
-    { key: 'level_name', title: 'Nivel' },
-    { key: 'period_name', title: 'Periodo' },
+    { key: 'level_name', title: 'Nivel', sortable: false },
+    { key: 'period_name', title: 'Periodo', sortable: false },
+    { key: 'is_active', title: 'Estado', sortable: false },
     { key: 'actions', title: 'Acciones', sortable: false },
   ],
   actions: {
@@ -39,6 +38,19 @@ const optionsTable = {
     delete: {
       url: "/course/delete"
     },
+    changeStatus: {
+      show: true,
+      url: "/course/changeStatus",
+      dbField: "status",
+      btnActive: {
+        text: 'Activo',
+        value: 'Activo',
+      },
+      btnInactive: {
+        text: 'Finalizado',
+        value: 'Finalizado',
+      },
+    }
   }
 }
 
@@ -49,13 +61,6 @@ const goViewEdit = (data: any) => {
 const goViewCreate = () => {
   router.push({ name: "Course-Form", params: { action: "create" } })
 }
-
-
-
-const selectCompany = (company: object) => {
-  authenticationStore.company = company;
-  router.push({ name: "Home" });
-};
 
 
 const tableLoading = ref(false); // Estado de carga de la tabla

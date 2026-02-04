@@ -26,6 +26,7 @@ const tableLoading = ref(false); // Estado de carga de la tabla
 const optionsTable = {
   url: "/day/list",
   headers: [
+    { key: 'id', title: 'ID' },
     { key: 'day', title: 'Días' },
     { key: 'actions', title: 'Acciones', sortable: false },
   ],
@@ -86,8 +87,7 @@ const goCreate = () => {
 
       <VCardText class="mt-2">
 
-        <TableFull ref="refTableFull" :options="optionsTable" @edit="goEdit"
-          @update:loading="tableLoading = $event">
+        <TableFull ref="refTableFull" :options="optionsTable" @edit="goEdit" @update:loading="tableLoading = $event">
         </TableFull>
       </VCardText>
     </VCard>
